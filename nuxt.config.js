@@ -28,7 +28,6 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'modern-css-reset',
     '~/assets/scss/function.scss'
   ], 
   

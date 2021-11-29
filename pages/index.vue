@@ -1,6 +1,8 @@
 <template>
  <main>
-    <h1>여기는 인덱스 페이지</h1>
+    <div id="contents">
+      <section id="section0"></section>
+    </div>
   </main>
 </template>
 
@@ -10,4 +12,18 @@ export default {}
 
 
 <style lang="scss">
+  @import "~assets/scss/reset";
+  @import "~assets/scss/function";
+  //사용법
+      //@include toRem(width, 400);
+  //
+  #section0{
+      height: 100vh;
+      background-color: #000000;
+      background-size: cover;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+  }
+
 </style>
