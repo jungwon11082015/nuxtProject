@@ -40,7 +40,12 @@
         z-index: 100;
         h1{ 
             @include toRem(width, 120);
-            a{ @include toRem( font-size, 14)};
+            a{ 
+                @include toRem( font-size, 36);
+                font-family: 'Anton', sans-serif;
+                font-weight: bold;
+                color: #000;
+            };
         }
     }
 </style> 
