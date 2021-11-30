@@ -4,15 +4,18 @@
             <a href="/">HeoPro-v</a>
         </h1>
         <nav>
-            <ul class="nav_list">
+            <ul class="nav-list">
                 <li>
                     <a href="javascript:;">About</a>
+                    <div class="location-dot"></div>
                 </li>
                 <li>
                     <a href="javascript:;">Product</a>
+                    <div class="location-dot"></div>
                 </li>
                 <li>
                     <a href="javascript:;">Content me</a>
+                    <div class="location-dot"></div>
                 </li>
             </ul>
         </nav>
@@ -42,33 +45,65 @@
         z-index: 100;
         h1{ 
             position: absolute;
-            @include toRem(top, 36);
-            @include toRem(left, 50);
+            @include toRem(top, 60);
+            @include toRem(left, 60);
             a{ 
-                @include toRem( font-size, 28);
+                @include toRem( font-size, 26);
                 font-family: 'Anton', sans-serif;
-                font-weight: bold;
                 color: #fff;
             };
         }
         nav{ 
-            @include toRem( width, 340 );
-            margin: 0 auto;
-            @include toRem( margin-top, 38);
-            .nav_list{
+            position: absolute;
+            @include toRem(top, 62);
+            @include toRem(right, 160);
+            .nav-list{
                 li{ 
                     float: left;
+                    position:relative;
                     @include toRem( margin-left, 36);
                     a{
                         position: relative;
                         display: block;
-                        @include toRem( font-size, 22 );
-                        @include toRem( letter-spacing, -1 );
+                        @include toRem( font-size, 20 );
+                        @include toRem( letter-spacing, 0.5 );
                         font-family: 'Anton', sans-serif;
-                        font-weight: bold;
                         color: #fff;
+                        &:hover + .location-dot{
+                            opacity: 1;
+                            transform: translateY(-16px);
+                        }
+                    }
+                    .location-dot{
+                        position: absolute;
+                        @include toRem( width, 5);
+                        @include toRem( height, 5);
+                        border-radius: 50%;
+                        transition: background-color 200ms ease-in-out;
+                        background-color: #F3F3F3;
+                        margin-left: auto;
+                        margin-right: auto;
+                        left: 0;
+                        right: 0;
+                       @include toRem( top, 48);
+                        transition: transform 400ms, opacity 400ms;
+                        animation-duration: 800ms;
+                        animation-timing-function: ease;
+                        animation-fill-mode: forwards;
+                        opacity: 0;
                     }
                     &:first-child{ margin-left:0; }
+                    $show-numbers:true;
+                    $num : 3;
+                    @if $show-numbers {
+                        @for $i from 1 through $num {
+                            &:nth-child(#{$i}){
+                                .location-dot{
+                                    animation-delay: #{($i*80)+780}ms;
+                                }
+                            }
+                        }
+                    }
                 }
                 &:after{ content: ''; display: block; clear: both; }
             }
