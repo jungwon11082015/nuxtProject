@@ -18,13 +18,43 @@
 
           </p>
         </div>
+        <div class="section0_bubble-box">
+          <div class="bubble-inner">
+            <div class="bubble" v-for="item in 100" :key="item"></div>
+          </div>
+        </div>
       </section>
     </div>
   </main>
 </template>
 
 <script>
-export default {}
+  import { gsap, Expo } from 'gsap';
+
+  export default {
+    data: function(){
+        return {
+        }
+    },
+
+    beforeCreate(){
+
+    },
+
+    created(){
+
+    },
+
+    mounted(){
+      console.log( gsap );
+    },
+    
+    methods:{
+
+    },
+
+ 
+  }
 </script>
 
 
@@ -42,7 +72,7 @@ export default {}
     width: 100%;
     overflow: hidden;
     .section0_text-box{
-      position: absolute;
+      position: absolute; z-index: 10;
       @include toRem(top, 500);
       @include toRem(left, 100);
       transform: translate(0, -50%);
@@ -50,9 +80,9 @@ export default {}
       .text-list{
         li{
           @include toRem(font-size, 220);
-          @include toRem( letter-spacing, 1.5);
+          @include toRem( letter-spacing, 5);
           font-family: 'Anton', sans-serif;
-          font-weight: bold;
+          font-weight: 400;
           color: #fff;
         }
         :nth-child(1){
@@ -74,9 +104,47 @@ export default {}
           color: #fff;
           @include toRem( font-size, 24 );
           text-transform: uppercase;
-          font-weight: normal;
+          font-weight: 500;
           @include toRem( line-height, 30 );
           font-family: 'Noto Sans KR';
+      }
+    }
+    .section0_bubble-box{
+        position: relative;
+        width: 100%;
+        min-height: 100%;
+        transform-style: preserve-3d;
+      .bubble-inner{
+        margin: 400px auto 0;
+        width: 500px;
+        height: 500px;
+        transform-style: preserve-3d;
+        transform-origin: center center;
+        perspective: 600px;
+        .bubble{
+          position: absolute;
+          background: black;
+          opacity: .7;
+          border-radius: 50%;
+          animation: move 3s infinite;
+        }
+
+        @for $i from 1 through 100 {
+          .bubble:nth-child(#{$i}){
+            $size: random(30)+px;
+            height: $size;
+            width: $size;
+            animation-delay: -$i * .2s;
+            transform: translate3d( (random(1000) * 1px),  (random(1000) * 1px), (random(2000) * 1px));
+            background: hsl( random(360) , 100%, 50%);
+          }
+        }
+
+        @keyframes move { 
+          100% {
+            transform: translate3d(0, 0, -500px);
+          }
+        }
       }
     }
 

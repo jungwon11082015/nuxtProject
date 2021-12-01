@@ -65,10 +65,11 @@
                     a{
                         position: relative;
                         display: block;
-                        @include toRem( font-size, 20 );
+                        @include toRem( font-size, 18 );
                         @include toRem( letter-spacing, 0.5 );
                         font-family: 'Anton', sans-serif;
                         color: #fff;
+                        font-weight: 500;
                         &:hover + .location-dot{
                             opacity: 1;
                             transform: translateY(-16px);
