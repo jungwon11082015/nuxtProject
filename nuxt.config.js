@@ -33,6 +33,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '@/plugins/vue-awesome-swiper',  mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -40,7 +41,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/assets/scss/function.scss'
+    '~/assets/scss/function.scss',
   ], 
   
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -73,7 +74,7 @@ export default {
     hoistUseStatements: true  // Hoists the "@use" imports. Applies only to "sass", "scss" and "less". Default: false.
   },
   //loading
-  loading: '~/components/LoadingBar.vue',
+  // loading: '~/components/LoadingBar.vue',
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

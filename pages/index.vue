@@ -131,7 +131,50 @@
           </ul>
         </div>
         <div class="section4_partner-box">
-          <img src="/images/partner_img.png" alt="">
+
+            <swiper ref="mySwiper" :options="swiperOptions">
+              <swiper-slide>Slide 1</swiper-slide>
+              <swiper-slide>Slide 2</swiper-slide>
+              <swiper-slide>Slide 3</swiper-slide>
+              <swiper-slide>Slide 4</swiper-slide>
+              <swiper-slide>Slide 5</swiper-slide>
+              <div class="swiper-pagination" slot="pagination"></div>
+            </swiper>
+
+
+          <ul class="section4_parther-list">
+            <li class="active">
+              	<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/1.png" height="100" width="250" alt="" />
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/2.png" height="100" width="250" alt="" />
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/3.png" height="100" width="250" alt="" />
+            </li>
+            <li>
+			          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/4.png" height="100" width="250" alt="" />
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/5.png" height="100" width="250" alt="" />
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/6.png" height="100" width="250" alt="" />
+            </li>
+            <li>
+              	<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/7.png" height="100" width="250" alt="" />
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/1.png" height="100" width="250" alt="" />
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/2.png" height="100" width="250" alt="" />
+            </li>
+            <li>
+              	<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/1.png" height="100" width="250" alt="" />
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/2.png" height="100" width="250" alt="" />
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/3.png" height="100" width="250" alt="" />
+            </li>
+            <li>
+			          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/4.png" height="100" width="250" alt="" />
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/5.png" height="100" width="250" alt="" />
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/6.png" height="100" width="250" alt="" />
+            </li>
+            <li>
+              	<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/7.png" height="100" width="250" alt="" />
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/1.png" height="100" width="250" alt="" />
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/2.png" height="100" width="250" alt="" />
+            </li>
+          </ul>
+          <!-- <img src="/images/partner_img.png" alt=""> -->
         </div>
       </section>
     </div>
@@ -142,6 +185,7 @@
 <script>
 
 import gsap from "gsap";
+
   export default {
     data: function(){
         return {
@@ -149,9 +193,19 @@ import gsap from "gsap";
               width: 0,
               height: 0
           },
+          swiperOptions: {
+          pagination: {
+            el: '.swiper-pagination'
+          },
+          // Some Swiper option/callback...
+          }
         }
     },
-
+    computed: {
+       swiper() {
+        return this.$refs.mySwiper.$swiper
+      }
+    },
     beforeCreate(){
 
     },
@@ -165,6 +219,8 @@ import gsap from "gsap";
       this.$nextTick( function(){
         this.section1TextMotion();  
         this.section3Motion();
+        // this.section4Vertical();
+        this.swiper.slideTo(3, 1000, false);
       });
     },
      
@@ -261,6 +317,11 @@ import gsap from "gsap";
           });
         });
         console.log( "section3Motion" );
+      },
+
+      section4Vertical: function(){
+      
+       
       }
     },
     destroyed() {
@@ -642,7 +703,7 @@ import gsap from "gsap";
       position: relative;
       width: 100%;
       overflow: hidden;
-     .section4_text-box{
+    .section4_text-box{
         position: absolute; z-index: 10;
         @include toRem(top, 500);
         @include toRem(left, 100);
@@ -671,6 +732,24 @@ import gsap from "gsap";
           top: 0;
           right: 0;
         }
+    }
+    .section4_parther-list{
+      @include toRem(width, 780);
+      @include toRem(height, 550);
+      @include toRem(margin-top, 300);
+      @include toRem(margin-left, 940);
+      overflow: hidden;
+      li{ 
+        display: block;
+        img{ 
+          float: left;
+          @include toRem(width, 250);
+          @include toRem( margin, 5 );
+        }
+        &:after{
+          content: ''; display: block; clear: both;
+        }
+      }
     }
   }
 </style>
