@@ -28,6 +28,9 @@
               <div class="arrow arrow-second"></div>
           </div>
         </div>
+        <div class="section0_side-box">
+          <p>DESIGN STUDIO</p>
+        </div>
       </section>
       <section id="section1">
         <div class="text-container text-container__back">
@@ -52,9 +55,30 @@
           </h2>
         </div>
       </section>
+      <section id="section2">
+         <div class="section2_text-box">
+          <ul class="text-list">
+            <li>WHAT</li>
+            <li>WE OFFER</li>
+          </ul>
+        </div>
+        <div class="section2_title-box">
+          <p>
+            PRODUCT ENVIRONMENT,<br />
+            USER EXPERIENCE,<br />
+            BASED ON THE DESIGNER'S SENSIBILITY<br />
+            EXPRESSING VALUABLE DESIGN.
+          </p>
+        </div>
+        <div class="section2_side-box">
+          <p>DESIGN STUDIO</p>
+        </div>
+      </section>
+
     </div>
   </main>
 </template>
+
 
 <script>
 
@@ -135,6 +159,7 @@ import gsap from "gsap";
 
  
   }
+
 </script>
 
 
@@ -189,6 +214,7 @@ import gsap from "gsap";
           font-family: 'Noto Sans KR';
       }
     }
+
     .section0_bubble-box{
         position: relative;
         width: 100%;
@@ -227,6 +253,7 @@ import gsap from "gsap";
         }
       }
     }
+
     .section0_arrow-box{
       position: absolute;
       @include toRem(top, 800);
@@ -287,7 +314,17 @@ import gsap from "gsap";
      
 
     }
-
+    .section0_side-box{
+      position: absolute;
+      @include toRem(top, 500);
+      @include toRem(right, -50);
+      p{
+        @include toRem(font-size, 20);
+        color: #757575;
+        @include toRem(letter-spacing, 5);
+        transform: rotate(-90deg);
+      }
+    }
   }
 
   #section1{
@@ -342,6 +379,67 @@ import gsap from "gsap";
       
       &:last-child{
         align-self: flex-end;
+      }
+    }
+
+  }
+
+  #section2{
+    height: 100vh;
+    background-color: #fff;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    .section2_text-box{
+      position: absolute; z-index: 10;
+      @include toRem(top, 450);
+      @include toRem(left, 100);
+      transform: translate(0, -50%);
+      width: auto;
+      .text-list{
+        li{
+          @include toRem(font-size, 180);
+          @include toRem( letter-spacing, 5);
+          font-family: 'Anton', sans-serif;
+          font-weight: 400;
+          color: #000;
+        }
+        :nth-child(1){
+
+        }
+        :nth-child(2){
+          color: #fff;
+          text-shadow: -1px 0 #000, 0 1px #000, 1px 0#000, 0 -1px #000;
+          text-transform: uppercase;
+          @include toRem( padding-left, 200);
+        }
+      }
+    }
+
+    .section2_title-box{
+      position: absolute;
+      @include toRem(top, 500);
+      @include toRem(right, 300);
+      p{
+          color: #000;
+          @include toRem( font-size, 24 );
+          text-transform: uppercase;
+          font-weight: 500;
+          @include toRem( line-height, 30 );
+          font-family: 'Noto Sans KR';
+      }
+    }
+
+    .section2_side-box{
+      position: absolute;
+      @include toRem(top, 500);
+      @include toRem(right, -50);
+      p{
+        @include toRem(font-size, 20);
+        color: #000;
+        @include toRem(letter-spacing, 5);
+        transform: rotate(-90deg);
       }
     }
 
