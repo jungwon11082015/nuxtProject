@@ -74,7 +74,55 @@
           <p>DESIGN STUDIO</p>
         </div>
       </section>
+      <section id="section3">
 
+        <article class="reveal">
+          <div class="row">
+            <div class="text">
+              <h1 class="title"><div class="show">Travel to: Italy</div></h1>
+              <div class="sub"><span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac facilisis urna, sed elementum ante. Aenean ornare vestibulum augue, id semper augue congue sed. </span>
+                <br>
+                  <span class="readmore">Read more</span> 
+              </div>
+            </div>
+            <div class="img-wrapper">
+            <img class="project-img" src="https://images.unsplash.com/photo-1498307833015-e7b400441eb8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" alt="">
+              </div>
+          </div> 
+        </article>
+        <article class="reveal">
+          <div class="row">
+            <div class="text">
+              <h1 class="title"><div class="show">Travel to: Greece</div></h1>
+              <div class="sub"><span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac facilisis urna, sed elementum ante. Aenean ornare vestibulum augue, id semper augue congue sed. </span>
+                  <br>
+                  <span class="readmore">Read more</span>
+              </div>
+            </div>
+            <div class="img-wrapper">
+              <img class="project-img" src="https://images.unsplash.com/photo-1530841377377-3ff06c0ca713?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="">
+            </div>
+          </div> 
+        </article>
+        <article class="reveal">
+          <div class="row">
+            <div class="text">
+              <h1 class="title"><div class="show">Travel to: Germany</div></h1>
+              <div class="sub"><span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac facilisis urna, sed elementum ante. Aenean ornare vestibulum augue, id semper augue congue sed. </span>
+                  <br>
+                  <span class="readmore">Read more</span>
+              </div>
+            </div>
+            <div class="img-wrapper">
+            <img class="project-img" src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="">
+              </div>
+          </div> 
+        </article>
+
+      </section>
     </div>
   </main>
 </template>
@@ -90,8 +138,6 @@ import gsap from "gsap";
               width: 0,
               height: 0
           },
-          textContainers:null,
-
         }
     },
 
@@ -107,6 +153,7 @@ import gsap from "gsap";
       window.addEventListener('resize', this.handleResize);
       this.$nextTick( function(){
         this.section1TextMotion();  
+        this.section3Motion();
       });
     },
      
@@ -118,7 +165,7 @@ import gsap from "gsap";
       section1TextMotion: function(){
         const gsap = this.$gsap;
         const ScrollTrigger = this.$ScrollTrigger;
-        gsap.registerPlugin(ScrollTrigger)
+        gsap.registerPlugin(ScrollTrigger);
         let textContainers = document.querySelectorAll( ".text-container" );
 
         textContainers.forEach(($ele, $index) =>{
@@ -151,6 +198,58 @@ import gsap from "gsap";
             ease: "none"
           });
         })
+      },
+      section3Motion: function(){
+        const gsap = this.$gsap;
+        const ScrollTrigger = this.$ScrollTrigger;
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray(".reveal").forEach(function (section) {
+          let title = section.querySelector(".show");
+          let imgWrapper = section.querySelector(".img-wrapper");
+          let img = section.querySelector(".project-img");
+          let subText = section.querySelector(".sub");
+
+          gsap.to(title, 1, {
+            ease: "power3.out",
+            y: 0,
+            scrollTrigger: {
+              trigger: section,
+              markers: true,
+              start: "-30%",
+              end: "bottom bottom"
+            }
+          });
+          gsap.to(imgWrapper, 1, {
+            ease: "power3.out",
+            width: "70%",
+            scrollTrigger: {
+              trigger: section,
+              start: "-50px",
+              end: "bottom bottom"
+            }
+          });
+
+          gsap.to(img, 1.05, {
+            ease: "power3.out",
+            width: "100%",
+            scrollTrigger: {
+              trigger: section,
+              start: "-50px",
+              end: "bottom bottom"
+            }
+          });
+          gsap.to(subText, 1.1, {
+            ease: "power3.out",
+            y: 0,
+            opacity: 1,
+            scrollTrigger: {
+              trigger: section,
+              start: "-30%",
+              end: "bottom bottom"
+            }
+          });
+        });
+        console.log( "section3Motion" );
       }
     },
     destroyed() {
@@ -443,6 +542,86 @@ import gsap from "gsap";
       }
     }
 
+  }
+
+  #section3{
+    overflow: hidden;
+    article {
+      height: 100vh;
+      width: 100vw;
+      background-color: #1a1a1a;
+      &.reveal {
+        padding: 70px 0;
+        display: flex;
+        justify-content: flex-end;
+          .row {
+            width: 90%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: relative;
+             .text {
+                width: 40%;
+                position: absolute;
+                left: 0;
+              }
+              h1,
+              .sub {
+                color: white;
+              }
+              h1 {
+                font-size: 48px;
+                font-family: "Playfair Display";
+                position: relative;
+                overflow: hidden;
+                &.show {
+                    transform: translate(0, 100px);
+                }
+                .sub {
+                  font-family: "Roboto";
+                  font-size: 21px;
+                  transform: translate(0, 100%);
+                  opacity: 0;
+                  span {
+                    background-color: #1a1a1a;
+                    &.readmore{
+                      margin-top:50px;
+                      position: relative;
+                      display:inline-block;
+                      &:hover{
+                        &:after{  width:100%; height: 100%;}
+                      }
+                      &:after{
+                        content:"";
+                        width:0%;
+                        height: 100%;
+                        position: absolute;
+                        border-bottom:1px solid white;
+                        left:0;
+                        bottom:0;
+                        transition:1s;
+                      }
+                    }
+                  }
+                }
+              }
+              .img-wrapper {
+                width: 0%;
+                height: 100%;
+                object-fit: cover;
+                background-color: #0b0b0b;
+                display: flex;
+                justify-content: flex-end;
+                img{
+                  width: 0%;
+                  height: 100%;
+                  object-fit: cover;
+                  right: 0;
+                }
+              }
+          }
+      }
+    }
   }
 
 </style>
