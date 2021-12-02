@@ -27,7 +27,7 @@ export default {
           'https:///fonts.googleapis.com/earlyaccess/notosanskr.css'
       },
     ]
-  },
+  }, 
 
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -45,7 +45,20 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     '@nuxtjs/style-resources',
+    'nuxt-gsap-module'
+
   ], 
+
+  gsap: {
+    /* module options */
+    extraPlugins: {
+      scrollTo: true,
+      scrollTrigger: true
+    },
+    extraEases: {
+      expoScaleEase: true
+    }
+  },
 
   styleResources: {
     // your settings here 
@@ -64,6 +77,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/style-resources',
+    '@nuxt/http'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
