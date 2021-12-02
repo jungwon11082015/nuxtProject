@@ -123,6 +123,17 @@
         </article>
 
       </section>
+      <section id="section4">
+        <div class="section4_text-box">
+          <ul class="text-list">
+            <li>OUR</li>
+            <li>CLIENTS</li>
+          </ul>
+        </div>
+        <div class="section4_partner-box">
+          <img src="/images/partner_img.png" alt="">
+        </div>
+      </section>
     </div>
   </main>
 </template>
@@ -624,4 +635,42 @@ import gsap from "gsap";
     }
   }
 
+  #section4{
+      height: 100vh;
+      background-color: #000;
+      background-size: cover;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+     .section4_text-box{
+        position: absolute; z-index: 10;
+        @include toRem(top, 500);
+        @include toRem(left, 100);
+        transform: translate(0, -50%);
+        width: auto;
+        .text-list{
+          li{
+            @include toRem(font-size, 180);
+            @include toRem( letter-spacing, 5);
+            font-family: 'Anton', sans-serif;
+            font-weight: 400;
+            color: #fff;
+          }
+          :nth-child(1){
+            color: #000000;
+            text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0#fff, 0 -1px #fff;
+            text-transform: uppercase;
+          }
+          :nth-child(2){
+            @include toRem( padding-left, 200);
+          }
+        }
+        .section4_partner-box{
+          width: 50%;
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+    }
+  }
 </style>
