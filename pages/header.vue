@@ -1,20 +1,21 @@
 <template>
     <header>
         <h1>
-            <a href="/">HeoPro-v</a>
+            <nuxt-link to="/">HeoPro-v</nuxt-link>
         </h1>
         <nav>
             <ul class="nav-list">
                 <li>
-                    <a href="javascript:;">About</a>
+                    <nuxt-link to="/about">About</nuxt-link>
+                    <a href="javascript:;"></a>
                     <div class="location-dot"></div>
                 </li>
                 <li>
-                    <a href="javascript:;">Product</a>
+                    <nuxt-link to="/v">Product</nuxt-link>
                     <div class="location-dot"></div>
                 </li>
                 <li>
-                    <a href="javascript:;">Content me</a>
+                     <nuxt-link to="/contact">Content me</nuxt-link>
                     <div class="location-dot"></div>
                 </li>
             </ul>

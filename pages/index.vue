@@ -346,8 +346,13 @@ import gsap from "gsap";
         });
       },
     },
+    beforeDestroy() {
+    },
     destroyed() {
-        window.removeEventListener('resize', this.handleResize);
+      alert(  this.$ScrollTrigger );
+      // this.$ScrollTrigger.killgetAll();
+
+      window.removeEventListener('resize', this.handleResize);
     },
 
  
