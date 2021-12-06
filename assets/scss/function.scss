@@ -2,6 +2,14 @@
     #{$property}: ($value / 16) + rem;
 }
 
+@function initRem($top, $right, $bottom, $left ) {
+	$remValueTop: ($top / 16) + rem; 
+	$remValueRight: ($right / 16) + rem; 
+	$remValueBottom: ($bottom / 16) + rem; 
+	$remValueLeft: ($left / 16) + rem; 
+	@return $remValueTop $remValueRight $remValueBottom $remValueLeft;
+}
+
 
 @mixin defaultLaOut {
 	width:100%;
