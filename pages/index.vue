@@ -32,7 +32,7 @@
           <p>DESIGN STUDIO</p>
         </div>
       </section>
-      <section id="section1">
+      <section id="section1" class="white">
         <div class="text-container text-container__back">
           <h2 class="parallax-text">
             Follow me for more tutorials
@@ -75,7 +75,6 @@
         </div>
       </section>
       <section id="section3">
-
         <article class="reveal">
           <div class="row">
             <div class="text">
@@ -123,7 +122,7 @@
         </article>
 
       </section>
-      <section id="section4">
+      <section id="section4" class="white">
         <div class="section4_text-box">
           <ul class="text-list">
             <li>OUR</li>
@@ -220,10 +219,12 @@
 
 
 <script>
-
+import Mixin from '../plugins/MyMixin.js'
 import gsap from "gsap";
 
+
   export default {
+    mixins: [Mixin],
     data: function(){
         return {
           window: {
@@ -241,22 +242,18 @@ import gsap from "gsap";
     },
 
     created(){
-      console.log( "created" );
     },
     mounted(){
 
-      window.addEventListener('resize', this.handleResize);
       this.$nextTick( function(){
         this.section1TextMotion();  
         this.section3Motion();
+        this.headerScroll();
       });
     },
      
     methods:{
-      handleResize() {
-          this.window.width = window.innerWidth;
-          this.window.height = window.innerHeight;
-      },
+     
       section1TextMotion: function(){
         const gsap = this.$gsap;
         const ScrollTrigger = this.$ScrollTrigger;
@@ -309,7 +306,6 @@ import gsap from "gsap";
             y: 0,
             scrollTrigger: {
               trigger: section,
-              markers: true,
               start: "-30%",
               end: "bottom bottom"
             }
@@ -345,16 +341,42 @@ import gsap from "gsap";
           });
         });
       },
-    },
-    beforeDestroy() {
-    },
-    destroyed() {
-      alert(  this.$ScrollTrigger );
-      // this.$ScrollTrigger.killgetAll();
+      headerScroll(){
+        const gsap = this.$gsap;
+        const ScrollTrigger = this.$ScrollTrigger;
+        gsap.registerPlugin(ScrollTrigger);
+        let sectionTarget = document.querySelectorAll( ".white" );
+        let header = document.getElementsByTagName( "header" )[0];
+        console.log( header ); 
+         sectionTarget.forEach((section, index) => {
+          gsap.to(sectionTarget, 0.35, {
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: section,
+              start: 'top bottom-=100',
+              toggleActions: 'play none none reverse',
+              // markers: true
+            }
+          });
+          
+          ScrollTrigger.create({
+            trigger: section,
+            id: index+1,
+            start: 'top center',
+            end: () => `+=${section.clientHeight + 30}`,
+            toggleActions: 'play reverse none reverse',
+            toggleClass: {targets: header, className: "is-active"},
+            // markers: true
+          })
+        })
 
-      window.removeEventListener('resize', this.handleResize);
-    },
+      },
+      beforeDestroy() {
+      },
+      destroyed() {
 
+      },
+    }
  
   }
 
@@ -529,7 +551,7 @@ import gsap from "gsap";
     position: relative;
     padding:10vw 0;
     overflow: hidden;
-    background-color: #000;
+    background-color: #ff;
     .image-container{
       position: relative;
       z-index: 2;
@@ -562,7 +584,7 @@ import gsap from "gsap";
       z-index: 3;
       .parallax-text{
         color: transparent;
-        -webkit-text-stroke: 0.2vw #f7f7f7;
+        -webkit-text-stroke: 0.2vw #000;
       }
     }
     .parallax-text{
@@ -572,7 +594,7 @@ import gsap from "gsap";
       line-height: 10vw;
       text-transform: uppercase;
       white-space: nowrap;
-      color: #f7f7f7;
+      color: #000;
       margin: 0;
       
       &:last-child{
@@ -584,7 +606,7 @@ import gsap from "gsap";
 
   #section2{
     height: 100vh;
-    background-color: #fff;
+    background-color: #000;
     background-size: cover;
     position: relative;
     width: 100%;
@@ -601,14 +623,14 @@ import gsap from "gsap";
           @include toRem( letter-spacing, 5);
           font-family: 'Anton', sans-serif;
           font-weight: 400;
-          color: #000;
+          color: #fff;
         }
         :nth-child(1){
 
         }
         :nth-child(2){
           color: #fff;
-          text-shadow: -1px 0 #000, 0 1px #000, 1px 0#000, 0 -1px #000;
+          text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0#fff, 0 -1px #fff;
           text-transform: uppercase;
           @include toRem( padding-left, 200);
         }

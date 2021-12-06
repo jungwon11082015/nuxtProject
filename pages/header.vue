@@ -110,5 +110,26 @@
                 &:after{ content: ''; display: block; clear: both; }
             }
         }
+        &.is-active{
+           h1{
+               a{ color: #000; }
+           } 
+            nav{ 
+                position: absolute;
+                @include toRem(top, 62);
+                @include toRem(right, 160);
+                .nav-list{
+                    li{ 
+                        a{
+                            color: #000;
+                        }
+                        .location-dot{
+                            background-color: #000;
+                        }
+                    }
+                    &:after{ content: ''; display: block; clear: both; }
+                }
+            }
+        }
     }
-</style> 
+</style>  
