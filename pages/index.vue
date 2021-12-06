@@ -11,10 +11,10 @@
         </div>
         <div class="section0_title-box">
           <p>
-            UI/UX를 전문으로 하고 있는<br />
-            디지털 디자인 스튜디오 인더엑스입니다.<br /> 
-            Specializing in UI/UX<br />
-            Digital design studio <em>HeoPro-v</em>
+            "할 수 있다고 생각하면 성취된다.<br />
+            하지만 안 된다고 생각하면 되지 않는다.<br /> 
+            이것은 불변의 법칙이다."<br />
+            <em>Pablo Ruiz Picasso</em>
           </p>
         </div>
         <div class="section0_bubble-box">
@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="section0_side-box">
-          <p>DESIGN STUDIO</p>
+          <p>2021 PROJECT SITE</p>
         </div>
       </section>
       <section id="section1" class="white">
@@ -221,11 +221,11 @@
 <script>
 import Mixin from '../plugins/MyMixin.js'
 import gsap from "gsap";
-
-
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger.min.js" 
+gsap.registerPlugin(ScrollTrigger);
   export default {
     mixins: [Mixin],
-    data: function(){
+    data(){
         return {
           window: {
               width: 0,
@@ -233,15 +233,20 @@ import gsap from "gsap";
           },
         }
     },
+    beforeDestroy () {
+      ScrollTrigger.getById("indexPannels").disable();
+    },
+
     computed: {
-       swiper() {
-      }
+  
     },
     beforeCreate(){
-
+      console.log( "beforeCreate", ScrollTrigger );
     },
 
     created(){
+      // ScrollTrigger.getAll();
+      console.log( "created", ScrollTrigger );
     },
     mounted(){
 
@@ -255,9 +260,6 @@ import gsap from "gsap";
     methods:{
      
       section1TextMotion: function(){
-        const gsap = this.$gsap;
-        const ScrollTrigger = this.$ScrollTrigger;
-        gsap.registerPlugin(ScrollTrigger);
         let textContainers = document.querySelectorAll( ".text-container" );
 
         textContainers.forEach(($ele, $index) =>{
@@ -292,9 +294,7 @@ import gsap from "gsap";
         })
       },
       section3Motion: function(){
-        const gsap = this.$gsap;
-        const ScrollTrigger = this.$ScrollTrigger;
-        gsap.registerPlugin(ScrollTrigger);
+      
         gsap.utils.toArray(".reveal").forEach(function (section) {
           let title = section.querySelector(".show");
           let imgWrapper = section.querySelector(".img-wrapper");
@@ -310,6 +310,7 @@ import gsap from "gsap";
               end: "bottom bottom"
             }
           });
+          
           gsap.to(imgWrapper, 1, {
             ease: "power3.out",
             width: "70%",
@@ -329,6 +330,7 @@ import gsap from "gsap";
               end: "bottom bottom"
             }
           });
+
           gsap.to(subText, 1.1, {
             ease: "power3.out",
             y: 0,
@@ -342,18 +344,15 @@ import gsap from "gsap";
         });
       },
       headerScroll(){
-        const gsap = this.$gsap;
-        const ScrollTrigger = this.$ScrollTrigger;
-        gsap.registerPlugin(ScrollTrigger);
+    
         let sectionTarget = document.querySelectorAll( ".white" );
         let header = document.getElementsByTagName( "header" )[0];
-        console.log( header ); 
          sectionTarget.forEach((section, index) => {
-          gsap.to(sectionTarget, 0.35, {
+          gsap.to(section, 0.35, {
             ease: "power3.out",
             scrollTrigger: {
               trigger: section,
-              start: 'top bottom-=100',
+              start: 'top top+=50px',
               toggleActions: 'play none none reverse',
               // markers: true
             }
@@ -361,9 +360,9 @@ import gsap from "gsap";
           
           ScrollTrigger.create({
             trigger: section,
-            id: index+1,
-            start: 'top center',
-            end: () => `+=${section.clientHeight + 30}`,
+            id: "indexPannels",
+            start: 'top top+=50px',
+            end: () => `+=${section.clientHeight}`,
             toggleActions: 'play reverse none reverse',
             toggleClass: {targets: header, className: "is-active"},
             // markers: true
@@ -376,8 +375,8 @@ import gsap from "gsap";
       destroyed() {
 
       },
-    }
- 
+    },
+  
   }
 
 </script>
@@ -481,7 +480,7 @@ import gsap from "gsap";
       .section0_arrrow-area{
         position: relative;
           @include toRem(width, 30);
-          @include toRem(height, 140);
+          @include toRem(height, 80);
           $ani-speed: 2s;
           $ani-delay: 1s;
           .arrow {
@@ -537,7 +536,7 @@ import gsap from "gsap";
     .section0_side-box{
       position: absolute;
       @include toRem(top, 500);
-      @include toRem(right, -50);
+      @include toRem(right, -100);
       p{
         @include toRem(font-size, 20);
         color: #757575;
@@ -747,7 +746,7 @@ import gsap from "gsap";
 
   #section4{
       height: 100vh;
-      background-color: #000;
+      background-color: #fff;
       background-size: cover;
       position: relative;
       width: 100%;
@@ -764,11 +763,11 @@ import gsap from "gsap";
             @include toRem( letter-spacing, 5);
             font-family: 'Anton', sans-serif;
             font-weight: 400;
-            color: #fff;
+            color: #000;
           }
           :nth-child(1){
             color: #000000;
-            text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0#fff, 0 -1px #fff;
+            text-shadow: -1px 0 #000, 0 1px #000, 1px 0#000, 0 -1px #000;
             text-transform: uppercase;
           }
           :nth-child(2){
