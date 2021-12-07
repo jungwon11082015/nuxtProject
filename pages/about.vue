@@ -4,7 +4,12 @@
             <div class="about-title">
                 <div class="about-title-box">
                     <h1>We are a Digital</h1>
-                    <h2>design Studio</h2>
+                    <h2>
+                        <span class="box"></span>
+                        <span class="hi">Hi, I'm</span>
+                        <span class="text"></span>
+                        <span class="cursor">_</span>
+                    </h2>
                 </div>
             </div>
         </section>
@@ -85,7 +90,59 @@
 </template> 
 
 <script>
+    import Mixin from '../plugins/MyMixin.js'
+    import {gsap, power2, power3, power4, elastic } from "gsap";
     export default {
+        data(){
+            return {
+                window: {
+                    width: 0,
+                    height: 0
+                },
+            }
+        },
+        beforeDestroy () {
+            console.log( "beforeDestroy" );
+        },
+
+        computed: {
+    
+        },
+        beforeCreate(){
+            console.log( "beforeCreate" );
+        },
+
+        created(){
+            console.log( "created" );
+        },
+        mounted(){
+
+        this.$nextTick( function(){
+            console.log( "nextTick" ); 
+            this.aboutKvShow();
+        });
+        },
+        
+        methods:{
+            aboutKvShow(){
+                const words = ["Frabatx.", "a Developer"];
+
+                let cursor = gsap.to('.cursor', {opacity: 0, ease: "power2.inOut", repeat: -1});
+                
+                let boxTl = gsap.timeline();   
+                    boxTl.to('.box',{duration:1, width: "17vw", delay: 0.5, ease: "power4.inOut"})
+                    .from('.hi', {duration: 1, y: "7vw", ease: "power3.out", onComplete: ()=> masterTl.play()})
+                    .to('.box', {duration: 1, height: "7vw", ease: "elastic.out(1, 0.3)"});
+                let masterTl = gsap.timeline({repeat: -1}).pause();
+                words.forEach(word => {
+                    console.log( gsap.timeline ); 
+                    let tl = gsap.timeline({repeat: 1, yoyo: true, repeatDelay:1})
+                    tl.to('.text', 0.35, {duration: 1, text: word});
+                    masterTl.add(tl);
+                })
+
+            }
+        },
     }
 </script>
 
@@ -127,6 +184,21 @@
                         color: #000000;
                         text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0#fff, 0 -1px #fff;
                         text-transform: uppercase;
+                    }
+                    h2{
+                        position: relative;
+                        font-size: 5.4vw;
+                        font-weight: bold;
+                        overflow: hidden;
+                        .box{
+                            position: absolute;
+                            bottom: 0;
+                            display: inline-block;
+                            background: blue;
+                            height: 1vw;
+                            z-index: -1; 
+                        }
+                        .hi{ display: inline-block;}
                     }
                 }
             }
