@@ -641,7 +641,7 @@ gsap.registerPlugin(ScrollTrigger);
       @include toRem(top, 500);
       @include toRem(right, 300);
       p{
-          color: #000;
+          color: #fff;
           @include toRem( font-size, 24 );
           text-transform: uppercase;
           font-weight: 500;
