@@ -41,7 +41,34 @@
 </template> 
 
 <script>
+    import Mixin from '../plugins/MyMixin.js'
+    import {gsap, power2, power3, power4, elastic  } from "gsap";
     export default {
+        data(){
+            return {
+               intervalInIt: '',
+            }
+        }, 
+        beforeDestroy () {
+            console.log( "beforeDestroy" );
+        },
+
+        beforeCreate(){
+            console.log( "beforeCreate" );
+        },
+
+        created(){
+            console.log( "created" );
+        },
+        mounted(){
+
+            this.$nextTick( function(){
+            });
+        },
+        
+        methods:{
+        
+        },
     }
 </script>
 
@@ -55,7 +82,13 @@
     @include toRem(padding-top, 240);
     @include toRem(padding-bottom, 130);
     background: #000;
-    .container{ overflow: hidden;}
+    .container{ overflow: hidden;
+        #canvas{
+            position: absolute;
+            top:0;
+            left:0; 
+        }
+    }
   }
     body {
         background-color: #444442;

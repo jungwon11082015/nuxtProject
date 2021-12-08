@@ -78,7 +78,7 @@
         <article class="reveal">
           <div class="row">
             <div class="text">
-              <h1 class="title"><div class="show">Travel to: Italy</div></h1>
+              <h1 class="title"><div class="show">CASAMIA</div></h1>
               <div class="sub"><span>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac facilisis urna, sed elementum ante. Aenean ornare vestibulum augue, id semper augue congue sed. </span>
                 <br>
@@ -86,7 +86,7 @@
               </div>
             </div>
             <div class="img-wrapper">
-            <img class="project-img" src="https://images.unsplash.com/photo-1498307833015-e7b400441eb8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" alt="">
+            <img class="project-img" src="images/project_img_01.jpg" alt="">
               </div>
           </div> 
         </article>

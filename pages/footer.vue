@@ -8,20 +8,24 @@
                         In Mind?
                     </h2>
                     <div class="footerInfo">
-                        <p class="name">INTHE X</p>
+                        <p class="name">HeoPro-v</p>
                         <p class="subTitle">GET IN TOUCH</p>
                         <div class="companyInfo">
                             <div class="infoList">
                                 <div class="th">Email</div>
-                                <div class="td">inthex@inthe-x.com</div>
+                                <div class="td">
+                                    <a href="mailto:jungwon11082015@gmail.com">
+                                        jungwon11082015@gmail.com
+                                    </a>
+                                </div>
                             </div>
                             <div class="infoList">
                                 <div class="th">Phone</div>
-                                <div class="td">0507-1361-5665</div>
+                                <div class="td">010-9181-9744</div>
                             </div>
                             <div class="infoList">
                                 <div class="th">Address</div>
-                                <div class="td">서울특별시 성동구 성수동2가 더리브세종타워 9층 903호</div>
+                                <div class="td">경기도 부천시 계남로 106</div>
                             </div>
                         </div>
                     </div>
@@ -35,17 +39,12 @@
                         <a href="contact.html">Contact</a>
                     </div>
                     <div class="exploreList wt">
-                        <a href="#none">Brunch.</a>
-                        <a href="#none">Behence.</a>
-                        <a href="#none">Pinterest</a>
+                        <a href="#none"><img src="/images/icon_facebook.png" alt="페이스북 바로가기"></a>
+                        <a href="#none"><img src="/images/icon_instagram.png" alt="인스타 바로가기"></a>
+                        <a href="#none"><img src="/images/icon_twitter.png" alt="트위터 바로가기"></a>
                     </div>
                 </div>
             </div>
-            <!--<div class="copyrightArea div_wrap">
-                    <p class="copyright">
-                        ©INTHEX. All rights reserved.
-                    </p>
-                </div>-->
         </div>
     </footer>
 </template> 
@@ -108,6 +107,7 @@
                                 color: #fff;
                                 font-size: 0.78125vw;
                                 float: left;
+                                a{ color: #fff; }
                             }
                         }
                     }
@@ -133,6 +133,10 @@
                     }
                     &.wt a{
                         color: #fff;
+                        img{
+                              @include toRem(width, 40);
+                        }
+                    
                     }
                 }
             }

@@ -211,6 +211,7 @@
         .inner{
             padding:initRem( 100, 150, 0, 150  );
             article{
+                @include toRem(padding-bottom, 160);
                 overflow: hidden;
                 h2{
                     @include toRem(font-size, 20);
@@ -289,7 +290,7 @@
                             @include toRem(height, 1);
                             @include toRem(top, 0);
                             @include toRem(left, 0);
-                            background: #000;
+                            background: #fff;
                         }
                     }
                 }
