@@ -1,5 +1,19 @@
 <template>
  <main>
+    <div id="loading-motion" style="display:none">
+      <div class="mask">
+        <div class="mask-center">
+          <span>H</span>
+          <span>E</span>
+          <span>O</span>
+          <span>P</span>
+          <span>R</span>
+          <span>O</span>
+          <span>-</span>
+          <span>v</span>
+        </div>
+      </div>
+    </div>
     <div id="contents">
       <section id="section0">
         <div class="section0_text-box">
@@ -86,22 +100,22 @@
               </div>
             </div>
             <div class="img-wrapper">
-            <img class="project-img" src="images/project_img_01.jpg" alt="">
+            <img class="project-img" src="images/project_img_01.jpg" alt="casamia">
               </div>
           </div> 
         </article>
         <article class="reveal">
           <div class="row">
             <div class="text">
-              <h1 class="title"><div class="show">Travel to: Greece</div></h1>
+              <h1 class="title"><div class="show">Bullsone</div></h1>
               <div class="sub"><span>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac facilisis urna, sed elementum ante. Aenean ornare vestibulum augue, id semper augue congue sed. </span>
                   <br>
                   <span class="readmore">Read more</span>
               </div>
             </div>
-            <div class="img-wrapper">
-              <img class="project-img" src="https://images.unsplash.com/photo-1530841377377-3ff06c0ca713?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="">
+            <div class="img-wrapper"> 
+              <img class="project-img" src="images/project_img_02.jpg" alt="bullsone">
             </div>
           </div> 
         </article>
@@ -388,6 +402,34 @@ gsap.registerPlugin(ScrollTrigger);
   //사용법
       //@include toRem(width, 400);
   //
+  #loading-motion{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+
+
+    .mask{
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background: #000;
+      border-radius: 20px;
+      .mask-center{
+        width: inherit;
+        height: inherit;
+        text-align: center;
+        span{ font-size:30px; color: #fff; }
+      }
+    }
+   }
+  
   #section0{
     height: 100vh;
     background-color: #000;
