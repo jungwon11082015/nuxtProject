@@ -2,10 +2,11 @@
     <main>
         <div class="container">
             <div class="row">
-                <h1>contact us</h1>
+                <h1>안녕하세요 <span>&#9996;</span></h1>
+                <h2>저는 당신과 함께할 준비가 되어있습니다.</h2>
             </div>
             <div class="row">
-                <h4 style="text-align:center">We'd love to hear from you!</h4>
+                <h4 style="text-align:center">무엇을 도와드릴까요? 도움이 필요하신 내용이나 궁금하신 사항을 상세히 알려주세요.</h4>
             </div>
             <div class="row input-container">
                 <div class="col-xs-12">
@@ -83,11 +84,22 @@
     @include toRem(padding-bottom, 130);
     background: #000;
     .container{ overflow: hidden;
-        #canvas{
-            position: absolute;
-            top:0;
-            left:0; 
+       h1 {
+            font-weight: 600;
+            @include toRem( font-size, 40 );
+            color: #fff;
+            text-align: center;
+            span{ color: orange;}
+            font-family: 'Noto Sans KR';
+        
         }
+       h2{ 
+            @include toRem( margin-top, 20 );
+            color: #fff; 
+            @include toRem( font-size, 30 );
+            text-align: center;
+            font-family: 'Noto Sans KR';
+       }
     }
   }
     body {
@@ -95,13 +107,7 @@
         padding-top: 85px;
     }
 
-    h1 {
-        font-family: 'Poppins', sans-serif, 'arial';
-        font-weight: 600;
-        font-size: 72px;
-        color: white;
-        text-align: center;
-    }
+ 
 
     h4 {
         font-family: 'Roboto', sans-serif, 'arial';

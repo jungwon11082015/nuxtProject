@@ -27,7 +27,10 @@ export default {
         href:
           'https:///fonts.googleapis.com/earlyaccess/notosanskr.css'
       },
-    ]
+    ],
+    script: [
+      { src: 'https://polyfill.io/v3/polyfill.min.js?features=es6%2Ces7%2CArray.from'}
+   ],
   }, 
 
  
@@ -85,5 +88,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    vendor: [ 'babel-polyfill', 'eventsource-polyfill' ]
   }
 }
