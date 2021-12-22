@@ -39,3 +39,7 @@
     },
   }
 </script>
+
+<style lang="scss">
+  .loading-page{ position: fixed; top:0; left:0; width: 100vw; height: 100vw; background:#fff; z-index: 100;} 
+</style>

@@ -78,7 +78,7 @@ export default {
     hoistUseStatements: true  // Hoists the "@use" imports. Applies only to "sass", "scss" and "less". Default: false.
   },
   //loading
-  // loading: '~/components/LoadingBar.vue',
+  loading: '~/components/LoadingBar.vue',
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
