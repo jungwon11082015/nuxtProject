@@ -88,6 +88,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    vendor: [ 'babel-polyfill', 'eventsource-polyfill' ]
+    vendor: [ 'babel-polyfill', 'eventsource-polyfill' ],
+    // ssr:false,
   }
 }

@@ -255,12 +255,12 @@ gsap.registerPlugin(ScrollTrigger);
   
     },
     beforeCreate(){
-      console.log( "beforeCreate" );
+      // console.log( "beforeCreate" );
     },
 
     created(){
       // ScrollTrigger.getAll();
-      console.log( "created" );
+      // console.log( "created" );
     },
     mounted(){
 
