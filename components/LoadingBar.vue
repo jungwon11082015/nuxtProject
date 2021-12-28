@@ -13,13 +13,21 @@
   </div>
 </template>
 <script>
+  import Mixin from '../plugins/MyMixin.js'
+  import {gsap, power2, power3, power4, Expo  } from "gsap";
   export default {
     data: () => ({
       loading: true,
       counter : 0,
-      num:0,
-    }),
  
+    }),
+    created(){
+      if(!process.server){
+        console.log( "ddddddddddddddddddddddd" ); 
+      }else{
+        console.log( "2222")
+      }
+    },
     methods: {
 
       loadingShow(){
