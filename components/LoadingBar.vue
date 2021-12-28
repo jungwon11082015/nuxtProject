@@ -1,147 +1,78 @@
 <template>
   <div v-show="loading" class="loading-page">
-    <div id="holder">
-	  		<div id="slogans">
-		  		<p class="slogan"><strong>TWEENMAX</strong></p>
-		  		<p class="slogan"><strong>IS GREAT</strong></p>
-		  		<p class="slogan"><strong>YOU CAN</strong></p>
-		  		<p class="slogan"><strong>ANIMATE</strong></p>
-		  		<p class="slogan"><strong>EVERYTHING</strong></p>
-		  		<p class="slogan"><strong>WITH</strong></p>
-	  		</div>
+    <div class="loading-content">
+      <div class="loading-box">
+        <em ref="textTarget">HeoPro-v</em>
+      </div>
     </div>
   </div>
 </template>
 <script>
   import Mixin from '../plugins/MyMixin.js'
-  import {gsap, power2, power3, power4, Expo  } from "gsap";
+  import {gsap, Power0, Power2, Power3, Power4, Expo, Bounce, Back, Elastic, SlowMo,  TweenLite  } from "gsap";
   export default {
     data: () => ({
       loading: true,
       counter : 0,
+      isLoadingCheck:false
  
     }),
     created(){
-      if(!process.server){
-        console.log( "ddddddddddddddddddddddd" ); 
-      }else{
-        console.log( "2222")
-      }
+    
     },
     methods: {
+      textShow(){
+        let textElm = this.$refs.textTarget;
+        let _this = this;
 
-      loadingShow(){
-          const _this = this;
-          const slogans = document.querySelectorAll( ".slogan > strong" );
-          const slogansArray = Array.from(slogans);
-          const holder = document.getElementById( "holder" );
-      
-          for (const element of slogansArray) {
-            element.parentElement.setAttribute("style","position:abolute; top:0px; left:0px");
-          }
-
-        _this.switchSlogan( slogansArray );
-
-          // slogans.parentNode.style({position : "absolute", top:"0px", left:"0px"});
-          // console.dir( slogansArray[0].parentElement ); 
+        let tl = gsap.timeline(); //create the timeline
+        tl.fromTo(textElm, 0.6, {scale:2.4, y:0, x:0, opacity:0, ease:Expo.easeIn}, { scale:0.35, y:0, x:0, opacity:1 })
+        .to( textElm, 0.6, {scale:3, y:0, x:0, opacity:0,  ease:Expo.easeOut, delay:1, onComplete:  _this.complete })
       },
-      switchSlogan( $slogansArray ){
-        const _this = this;
-        //settings
-        let transitionTime = 0.4;
-        let slogansDelayTime = 2;
-        
-        //internal
-        let totalSlogans = $slogansArray.length;
-        
-        let oldSlogan = 0;
-        let currentSlogan = -1;
 
-        oldSlogan = currentSlogan;
-				
-				if(currentSlogan < totalSlogans-1){
-					currentSlogan ++
-				} else {
-					currentSlogan = 0;
-				}
-				
-        console.log( "11111111", $slogansArray );
-
-        
-				TweenLite.to($slogansArray.eq(oldSlogan), transitionTime, {top:-20, alpha:0, rotationX: 90});
-				TweenLite.fromTo($slogansArray.eq(currentSlogan), transitionTime, {top:20, alpha:0, rotationX: -90 }, {top:0, alpha:1, rotationX:0});
-				
-				TweenLite.delayedCall(slogansDelayTime, _this.switchSlogan());
-
-
-
+      complete(){
+        this.isLoadingCheck = true;
+        this.$nuxt.$emit('eventBusLoadingCheck', this.isLoadingCheck);
+        this.loading = false;
+        console.log('end');
       }
 
-
-      // start() {
-      //   const timer = setInterval(() => {
-      //       this.num = this.counter;
-      //       this.counter++;
-      //       this.num++;
-      //       this.$refs.line.style.width = this.num + "%";
-
-      //       if( this.counter == 100 ){
-      //           console.log( "여기?" );
-      //           clearInterval( timer );
-      //       }
-      //   }, 50);
-
-      //   this.loading = true;
-      // },
-      // finish() {
-      //   this.counter = 0;
-      //   this.num = 0;
-      //   this.loading = false;
-      // },
     },
     mounted(){
       this.$nextTick(() => {
-         if( process.client ){
-           this.loadingShow();
-         }
+        this.textShow();
       })
-     
     }
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  @import "~assets/scss/reset";
+  @import "~assets/scss/function";
+  //사용법
+      //@include toRem(width, 400);
+  //
   .loading-page{ 
-    position: fixed; top:0; left:0; width: 100vw; height: 100vw; background:#fff; z-index: 100;
-    #holder{
-        position: relative;
-        width: 100%;
-        margin: 100px auto;
-        -webkit-user-select: none;  
-        -moz-user-select: none;    
-        -ms-user-select: none;     
-        -o-user-select: none;
-        user-select: none;
+    position: fixed; top:0; left:0; width: 100%; height: 100%; background:#fff; z-index: 100; 
+    .loading-content{ 
+      position: relative;
+      display: table;
+      width: inherit; height: inherit;
+      text-align: center;
+      .loading-box{
+        display: table-cell; vertical-align: middle;
+        em{
+          display: inline-block;
+          @include toRem(font-size, 160);
+          @include toRem( letter-spacing, 5);
+          opacity: 0;
+          font-family: 'Anton', sans-serif;
+          font-weight: 400;
+          font-display: block;
+        }
+
       }
-      
-      #slogans{
-        position: relative;
-        top: 0px;
-        right: 0px;
-      }
-      
-      p.slogan{
-        text-rendering: optimizeLegibility;
-        margin: 0px;
-        font-size: 60px;
-        text-transform: uppercase;
-      }
-      
-      p.slogan strong{
-        display:block;
-        position:relative;
-        opacity:0;
-      }  
-      
-    } 
+        
+    }
+  }
 </style>

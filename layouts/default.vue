@@ -12,11 +12,28 @@ import loadingBar from '@/components/loadingBar.vue'
 import Footer from '@/pages/footer.vue'
 
 export default {
-  components: { Header, loadingBar, Footer }
+  components: { Header, loadingBar, Footer },
+  data(){
+      return {
+        loadingChecked: null,
+      }
+  },
+
+  created(){
+    this.$nuxt.$on('eventBusLoadingCheck', (isLoadingCheck) => {
+        this.loadingChecked = isLoadingCheck;
+        if( this.loadingChecked ){
+          const body = document.getElementsByTagName( "body" )[0];
+          body.style.overflow = "auto";
+        }
+    })
+
+  }
+
 }
 </script>
 
 <style>
-
+ body{ overflow: hidden; }
 
 </style>

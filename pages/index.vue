@@ -1,19 +1,5 @@
 <template>
  <main>
-    <div id="loading-motion" style="display:none">
-      <div class="mask">
-        <div class="mask-center">
-          <span>H</span>
-          <span>E</span>
-          <span>O</span>
-          <span>P</span>
-          <span>R</span>
-          <span>O</span>
-          <span>-</span>
-          <span>v</span>
-        </div>
-      </div>
-    </div>
     <div id="contents">
       <section id="section0">
         <div class="section0_text-box">
@@ -245,6 +231,7 @@ gsap.registerPlugin(ScrollTrigger);
               width: 0,
               height: 0
           },
+          loadingChecked: null,
         }
     },
     beforeDestroy () {
@@ -259,6 +246,11 @@ gsap.registerPlugin(ScrollTrigger);
     },
 
     created(){
+      this.$nuxt.$on('eventBusLoadingCheck', (isLoadingCheck) => {
+         this.loadingChecked = isLoadingCheck 
+      })
+
+
       // ScrollTrigger.getAll();
       // console.log( "created" );
     },
