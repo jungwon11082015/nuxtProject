@@ -2,7 +2,17 @@
  <main>
     <div id="contents">
       <section id="section0">
-        <div class="section0_text-box">
+        <div class="section0_inner">
+          <div class="section0_center">
+            <div class="section0_cricle">
+              <div class="section0_video_content">
+                  <video src="/video/index.mp4" autoplay  muted="true"></video>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- <div class="section0_text-box">
           <ul class="text-list">
             <li>CREATE</li>
             <li>DEVELOPER</li>
@@ -30,8 +40,9 @@
         </div>
         <div class="section0_side-box">
           <p>2021 PROJECT SITE</p>
-        </div>
+        </div> -->
       </section>
+
       <section id="section1" class="white">
         <div class="text-container text-container__back">
           <h2 class="parallax-text">
@@ -55,6 +66,7 @@
           </h2>
         </div>
       </section>
+
       <section id="section2">
          <div class="section2_text-box">
           <ul class="text-list">
@@ -74,6 +86,7 @@
           <p>DESIGN STUDIO</p>
         </div>
       </section>
+
       <section id="section3">
         <article class="reveal">
           <div class="row">
@@ -122,6 +135,7 @@
         </article>
 
       </section>
+
       <section id="section4" class="white">
         <div class="section4_text-box">
           <ul class="text-list">
@@ -213,6 +227,7 @@
             </ul>
         </div>
       </section>
+
     </div>
   </main>
 </template>
@@ -220,7 +235,7 @@
 
 <script>
 import Mixin from '../plugins/MyMixin.js'
-import gsap from "gsap";
+import {gsap, power0, power2, power3, power4, timeline,  elastic  } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger.min.js" 
 gsap.registerPlugin(ScrollTrigger);
   export default {
@@ -248,8 +263,8 @@ gsap.registerPlugin(ScrollTrigger);
     created(){
       this.$nuxt.$on('eventBusLoadingCheck', (isLoadingCheck) => {
          this.loadingChecked = isLoadingCheck 
+         console.log( this.loadingChecked );  
       })
-
 
       // ScrollTrigger.getAll();
       // console.log( "created" );
@@ -257,6 +272,10 @@ gsap.registerPlugin(ScrollTrigger);
     mounted(){
 
       this.$nextTick( function(){
+        
+        if( this.loadingChecked == true ){
+          this.section0Motion();
+        }
         this.section1TextMotion();  
         this.section3Motion();
         this.headerScroll();
@@ -264,7 +283,16 @@ gsap.registerPlugin(ScrollTrigger);
     },
      
     methods:{
-     
+      section0Motion: function(){
+        let target = document.querySelector( ".section0_cricle" );
+        console.log( target ); 
+
+        let tl = gsap.timeline();
+        tl.to( target, 0.15, { width:"5%", height:"10%",  ease: Power0.easeOut });
+        tl.to( target, 0.15, { width: "20%", height:"40%",  ease: Power0.easeOut });
+        tl.to( target, 0.35, { borderRadius:"0", width: "100%", height:"100%", ease: Power0.easeIn });
+      },
+
       section1TextMotion: function(){
         let textContainers = document.querySelectorAll( ".text-container" );
 
@@ -299,6 +327,7 @@ gsap.registerPlugin(ScrollTrigger);
           });
         })
       },
+
       section3Motion: function(){
       
         gsap.utils.toArray(".reveal").forEach(function (section) {
@@ -394,190 +423,197 @@ gsap.registerPlugin(ScrollTrigger);
   //사용법
       //@include toRem(width, 400);
   //
-  #loading-motion{
-    position: fixed;
-    top:0;
-    left:0;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-
-
-    .mask{
-      position: relative;
-      width: 200px;
-      height: 200px;
-      background: #000;
-      border-radius: 20px;
-      .mask-center{
-        width: inherit;
-        height: inherit;
-        text-align: center;
-        span{ font-size:30px; color: #fff; }
-      }
-    }
-   }
   
   #section0{
-    height: 100vh;
-    background-color: #000;
-    background-size: cover;
-    position: relative;
     width: 100%;
-    overflow: hidden;
-    .section0_text-box{
-      position: absolute; z-index: 10;
-      @include toRem(top, 500);
-      @include toRem(left, 100);
-      transform: translate(0, -50%);
-      width: auto;
-      .text-list{
-        li{
-          @include toRem(font-size, 180);
-          @include toRem( letter-spacing, 5);
-          font-family: 'Anton', sans-serif;
-          font-weight: 400;
-          color: #fff;
-        }
-        :nth-child(1){
-          color: #000000;
-          text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0#fff, 0 -1px #fff;
-          text-transform: uppercase;
-        }
-        :nth-child(2){
-          @include toRem( padding-left, 200);
+    // background: #fff;
+
+    .section0_inner{
+      position: fixed;
+      top:0; left:0; 
+      width: 100%;
+      height: 100%;
+      display: table;
+      .section0_center{
+        display: table-cell; vertical-align: middle;
+        .section0_cricle{
+             position: relative;
+            border-radius:50%;
+            width:0;
+            height:0;
+            border:none;
+            margin: 0 auto;
+            overflow: hidden;
+            .section0_video_content{
+              position: absolute; top:0; left:0; width: 100%; height: 100%;
+              video{
+                position: absolute;
+                transform: translate3d(-50%,-50%,0);
+                top: 50%;
+                left: 50%;
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+                overflow: hidden;
+                -o-object-fit: fill;
+                object-fit: fill;
+                z-index: 100;
+              }
+            }
         }
       }
     }
+  
+    // .section0_text-box{
+    //   position: absolute; z-index: 10;
+    //   @include toRem(top, 500);
+    //   @include toRem(left, 100);
+    //   transform: translate(0, -50%);
+    //   width: auto;
+    //   .text-list{
+    //     li{
+    //       @include toRem(font-size, 180);
+    //       @include toRem( letter-spacing, 5);
+    //       font-family: 'Anton', sans-serif;
+    //       font-weight: 400;
+    //       color: #fff;
+    //     }
+    //     :nth-child(1){
+    //       color: #000000;
+    //       text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0#fff, 0 -1px #fff;
+    //       text-transform: uppercase;
+    //     }
+    //     :nth-child(2){
+    //       @include toRem( padding-left, 200);
+    //     }
+    //   }
+    // }
 
-    .section0_title-box{
-      position: absolute;
-      @include toRem(top, 500);
-      @include toRem(right, 300);
-      p{
-          color: #fff;
-          @include toRem( font-size, 24 );
-          text-transform: uppercase;
-          font-weight: 500;
-          @include toRem( line-height, 30 );
-          font-family: 'Noto Sans KR';
-      }
-    }
+    // .section0_title-box{
+    //   position: absolute;
+    //   @include toRem(top, 500);
+    //   @include toRem(right, 300);
+    //   p{
+    //       color: #fff;
+    //       @include toRem( font-size, 24 );
+    //       text-transform: uppercase;
+    //       font-weight: 500;
+    //       @include toRem( line-height, 30 );
+    //       font-family: 'Noto Sans KR';
+    //   }
+    // }
 
-    .section0_bubble-box{
-        position: relative;
-        width: 100%;
-        min-height: 100%;
-        transform-style: preserve-3d;
-      .bubble-inner{
-        margin: 400px auto 0;
-        width: 500px;
-        height: 500px;
-        transform-style: preserve-3d;
-        transform-origin: center center;
-        perspective: 600px;
-        .bubble{
-          position: absolute;
-          background: black;
-          opacity: .7;
-          border-radius: 50%;
-          animation: move 3s infinite;
-        }
+    // .section0_bubble-box{
+    //     position: relative;
+    //     width: 100%;
+    //     min-height: 100%;
+    //     transform-style: preserve-3d;
+    //   .bubble-inner{
+    //     margin: 400px auto 0;
+    //     width: 500px;
+    //     height: 500px;
+    //     transform-style: preserve-3d;
+    //     transform-origin: center center;
+    //     perspective: 600px;
+    //     .bubble{
+    //       position: absolute;
+    //       background: black;
+    //       opacity: .7;
+    //       border-radius: 50%;
+    //       animation: move 3s infinite;
+    //     }
 
-        @for $i from 1 through 100 {
-          .bubble:nth-child(#{$i}){
-            $size: random(30)+px;
-            height: $size;
-            width: $size;
-            animation-delay: -$i * .2s;
-            transform: translate3d( (random(1000) * 1px),  (random(1000) * 1px), (random(2000) * 1px));
-            background: hsl( random(360) , 100%, 50%);
-          }
-        }
+    //     @for $i from 1 through 100 {
+    //       .bubble:nth-child(#{$i}){
+    //         $size: random(30)+px;
+    //         height: $size;
+    //         width: $size;
+    //         animation-delay: -$i * .2s;
+    //         transform: translate3d( (random(1000) * 1px),  (random(1000) * 1px), (random(2000) * 1px));
+    //         background: hsl( random(360) , 100%, 50%);
+    //       }
+    //     }
 
-        @keyframes move { 
-          100% {
-            transform: translate3d(0, 0, -500px);
-          }
-        }
-      }
-    }
+    //     @keyframes move { 
+    //       100% {
+    //         transform: translate3d(0, 0, -500px);
+    //       }
+    //     }
+    //   }
+    // }
 
-    .section0_arrow-box{
-      position: absolute;
-      @include toRem(top, 800);
-      @include toRem(left, 200);
-      .section0_arrrow-area{
-        position: relative;
-          @include toRem(width, 30);
-          @include toRem(height, 80);
-          $ani-speed: 2s;
-          $ani-delay: 1s;
-          .arrow {
-              opacity: 0;
-              position: absolute;
-              left: 50%;
-              top: 50%;
-              transform-origin: 50% 50%;
-              transform: translate3d(-50%, -50%, 0);
-                &.arrow-first {
-                    animation: arrow-movement $ani-speed ease-in-out infinite;
-                }
-                &.arrow-second {
-                    animation: arrow-movement $ani-speed $ani-delay ease-in-out infinite;
-                }
-                &:before{
-                  transform: rotate(45deg) translateX(-23%);
-                  transform-origin: top left;
-                }
-                &:after{
-                  transform: rotate(-45deg) translateX(23%);
-                  transform-origin: top right;
-                }
-          }
-          .arrow:before,
-          .arrow:after {
-              background: #C3F932;
-              content: '';
-              display: block;
-              height: 3px; 
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 30px;
-          }
-          // Animation
-          @keyframes arrow-movement {
-              0% { 
-                  opacity: 0;
-                  top: 40%;
-              }
-              70% {
-                  opacity: 1;
-              }
-              100% { 
-                  opacity: 0;
-              }
-          }
-      }
+    // .section0_arrow-box{
+    //   position: absolute;
+    //   @include toRem(top, 800);
+    //   @include toRem(left, 200);
+    //   .section0_arrrow-area{
+    //     position: relative;
+    //       @include toRem(width, 30);
+    //       @include toRem(height, 80);
+    //       $ani-speed: 2s;
+    //       $ani-delay: 1s;
+    //       .arrow {
+    //           opacity: 0;
+    //           position: absolute;
+    //           left: 50%;
+    //           top: 50%;
+    //           transform-origin: 50% 50%;
+    //           transform: translate3d(-50%, -50%, 0);
+    //             &.arrow-first {
+    //                 animation: arrow-movement $ani-speed ease-in-out infinite;
+    //             }
+    //             &.arrow-second {
+    //                 animation: arrow-movement $ani-speed $ani-delay ease-in-out infinite;
+    //             }
+    //             &:before{
+    //               transform: rotate(45deg) translateX(-23%);
+    //               transform-origin: top left;
+    //             }
+    //             &:after{
+    //               transform: rotate(-45deg) translateX(23%);
+    //               transform-origin: top right;
+    //             }
+    //       }
+    //       .arrow:before,
+    //       .arrow:after {
+    //           background: #C3F932;
+    //           content: '';
+    //           display: block;
+    //           height: 3px; 
+    //           position: absolute;
+    //           top: 0;
+    //           left: 0;
+    //           width: 30px;
+    //       }
+    //       // Animation
+    //       @keyframes arrow-movement {
+    //           0% { 
+    //               opacity: 0;
+    //               top: 40%;
+    //           }
+    //           70% {
+    //               opacity: 1;
+    //           }
+    //           100% { 
+    //               opacity: 0;
+    //           }
+    //       }
+    //   }
      
 
-    }
-    .section0_side-box{
-      position: absolute;
-      @include toRem(top, 500);
-      @include toRem(right, -100);
-      p{
-        @include toRem(font-size, 20);
-        color: #757575;
-        @include toRem(letter-spacing, 5);
-        transform: rotate(-90deg);
-      }
-    }
+    // }
+    // .section0_side-box{
+    //   position: absolute;
+    //   @include toRem(top, 500);
+    //   @include toRem(right, -100);
+    //   p{
+    //     @include toRem(font-size, 20);
+    //     color: #757575;
+    //     @include toRem(letter-spacing, 5);
+    //     transform: rotate(-90deg);
+    //   }
+    // }
   }
 
   #section1{

@@ -25,9 +25,10 @@
         let textElm = this.$refs.textTarget;
         let _this = this;
 
-        let tl = gsap.timeline(); //create the timeline
-        tl.fromTo(textElm, 0.6, {scale:2.4, y:0, x:0, opacity:0, ease:Expo.easeIn}, { scale:0.35, y:0, x:0, opacity:1 })
-        .to( textElm, 0.6, {scale:3, y:0, x:0, opacity:0,  ease:Expo.easeOut, delay:1, onComplete:  _this.complete })
+        let tl = gsap.timeline(); 
+        //create the timeline
+        tl.fromTo(textElm, 0.6, {scale:1.4, y:0, x:0, opacity:0, ease:Expo.easeIn}, { scale:0.35, y:0, x:0, opacity:1 })
+        .to( textElm, 0.6, {scale:1.4, y:0, x:0, opacity:0,  ease:Expo.easeOut, delay:1, onComplete:  _this.complete })
       },
 
       complete(){
