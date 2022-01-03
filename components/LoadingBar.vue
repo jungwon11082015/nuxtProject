@@ -35,7 +35,6 @@
         this.isLoadingCheck = true;
         this.$nuxt.$emit('eventBusLoadingCheck', this.isLoadingCheck);
         this.loading = false;
-        console.log('end');
       }
 
     },
