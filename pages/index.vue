@@ -12,10 +12,24 @@
             <div class="section0_text">
               <h2>
                 <span><em class="section0_title">누구나</em></span>
-                <span><em class="section0_title">언제든지</em></span>
-                <span><em class="section0_title">항상</em></span>
+                <span><em class="section0_title">마음 편히</em></span>
+                <span><em class="section0_title">놀 수 있게</em></span>
               </h2>
-            </div> 
+            </div>
+            <div class="btn-scroll-holder onHide white">
+            <button type="button" class="btn-scroll"> 
+                    <span class="circle-half-wrap pos-top"><i class="circle"></i></span>
+                    <span class="box"></span>
+                    <span class="circle-half-wrap pos-bot"><i class="circle"></i></span>
+
+                    <span class="ico-down-holder">
+                        <i class="ico down ico-sc-down-w down-1"></i>
+                        <i class="ico down ico-sc-down-w down-2 blind"></i>
+                    </span>
+                    <i class="ico up ico-sc-up"></i>
+                </button>
+            </div>
+
           </div>
         </div>
         <!-- <div class="section0_text-box">
@@ -489,21 +503,57 @@ gsap.registerPlugin(ScrollTrigger);
         .section0_text{
           position: absolute;
           top:0; right:0;
-          @include toRem(top, 280); 
-          @include toRem(right, 150); 
+          @include toRem(top, 400); 
+          @include toRem(right, 180); 
           @include toRem(width, 500); 
           @include toRem(height, 300); 
           z-index: 11;
           h2{
             span{ 
               display: block; position: relative;  overflow: hidden;
-              @include toRem(height, 60); 
-              @include toRem(margin-top, 20); 
-              @include toRem(font-size, 60); color: #fff;
+              @include toRem(height, 80); 
+              @include toRem(margin-top, 10); 
+              @include toRem(font-size, 70); color: #fff;
               font-family: 'Noto Sans KR';
               font-weight: 500;
               &:first-child{ margin-top:0; }
-              em{ position: absolute; top:0; left:0; opacity: 0; }
+              em{ position: absolute; top:0; left:0; opacity: 0; font-weight: bold; }
+            }
+          }
+        }
+
+        .btn-scroll-holder{
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          margin-right: 5.84112vw;
+          margin-bottom: 7.00935vw;
+          opacity: 1;
+          transform: translateZ(0);
+          transition: transform .25s ease-in-out 1.5s,opacity .25s ease-out 1.5s;
+          z-index: 2500;
+          .btn-scroll{
+            display: block;
+            position: relative;
+            width: 50px;
+            pointer-events: none;
+            cursor: none;
+            .circle-half{
+              display: block;
+              width: 100%;
+              position: relative;
+              height: 25px;
+              overflow: hidden;
+              .circle{
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                left: 0;
+                right: 0;
+                border: 2px solid #fff;
+                border-radius: 50%;
+                transition: border-color .35s;
+              }
             }
           }
         }
