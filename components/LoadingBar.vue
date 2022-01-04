@@ -42,7 +42,19 @@
       this.$nextTick(() => {
         this.textShow();
       })
-    }
+    },
+
+    destroyed() {
+      console.log( "destroyed" );
+      this.isLoadingCheck = false;
+      this.loading = true;
+    },
+
+    destroyed() {
+      console.log( "destroyed" );
+      this.isLoadingCheck = false;
+      this.loading = true;
+    },
   }
 </script>
 

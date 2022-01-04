@@ -28,7 +28,10 @@ export default {
         }
     })
 
-  }
+  },
+  destroyed() {
+    this.loadingChecked = null; 
+  },
 
 }
 </script>

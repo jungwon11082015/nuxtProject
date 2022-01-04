@@ -11,9 +11,9 @@
             </div>
             <div class="section0_text">
               <h2>
-                <span><em>누구나</em></span>
-                <span><em>언제든지</em></span>
-                <span><em>항상</em></span>
+                <span><em class="section0_title">누구나</em></span>
+                <span><em class="section0_title">언제든지</em></span>
+                <span><em class="section0_title">항상</em></span>
               </h2>
             </div> 
           </div>
@@ -241,7 +241,7 @@
 
 <script>
 import Mixin from '../plugins/MyMixin.js'
-import {gsap, Power0, power2, power3, power4, timeline,  elastic  } from "gsap";
+import {gsap, Power0, power2, power3, power4, timeline,Expo, elastic  } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger.min.js" 
 gsap.registerPlugin(ScrollTrigger);
   export default {
@@ -295,18 +295,21 @@ gsap.registerPlugin(ScrollTrigger);
           width : window.innerWidth + "px",
           height : window.innerHeight + "px"
         };
-
         Object.assign(section0Attribute.style, section0Style);
+        let section0TextList = document.querySelectorAll( ".section0_title");
+        let listArr = Array.prototype.slice.call( section0TextList );
+
+
 
         let target = document.querySelector( ".section0_cricle" );
-
         let tl = gsap.timeline();
         tl.to( target, 0.15, { width:"5%", height:"10%",  ease: Power0.easeOut });
         tl.to( target, 0.15, { width: "20%", height:"40%",  ease: Power0.easeOut });
         tl.to( target, 0.35, { borderRadius:"0", width: "100%", height:"100%", ease: Power0.easeIn, onComplete: function(){
-          
-          
-          console.log( "모션 등장 이후111" ); 
+         listArr.forEach( ( ele, index )=>{
+           gsap.set( ele,{ top: ele.clientHeight, opacity:0  });
+           gsap.to( ele, 0.35, { top: 0, opacity:1, ease:Power0.easeInOut, delay: index * 0.2 });
+         });
         }});
       },
 
@@ -395,6 +398,7 @@ gsap.registerPlugin(ScrollTrigger);
           });
         });
       },
+
       headerScroll(){
     
         let sectionTarget = document.querySelectorAll( ".white" );
@@ -425,7 +429,8 @@ gsap.registerPlugin(ScrollTrigger);
       beforeDestroy() {
       },
       destroyed() {
-
+        this.loadingChecked = false;
+        this.section0Vedio = null
       },
     },
   
@@ -477,17 +482,28 @@ gsap.registerPlugin(ScrollTrigger);
                 overflow: hidden;
                 -o-object-fit: fill;
                 object-fit: fill;
-                z-index: 100;
+                z-index: 10;
               }
             }
         }
         .section0_text{
           position: absolute;
           top:0; right:0;
+          @include toRem(top, 280); 
+          @include toRem(right, 150); 
+          @include toRem(width, 500); 
+          @include toRem(height, 300); 
+          z-index: 11;
           h2{
-            span{
-              @include toRem(font-size, 180); color: #fff;
-               font-family: 'Noto Sans KR';
+            span{ 
+              display: block; position: relative;  overflow: hidden;
+              @include toRem(height, 60); 
+              @include toRem(margin-top, 20); 
+              @include toRem(font-size, 60); color: #fff;
+              font-family: 'Noto Sans KR';
+              font-weight: 500;
+              &:first-child{ margin-top:0; }
+              em{ position: absolute; top:0; left:0; opacity: 0; }
             }
           }
         }
