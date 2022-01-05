@@ -17,17 +17,31 @@
               </h2>
             </div>
             <div class="btn-scroll-holder onHide white">
-            <button type="button" class="btn-scroll"> 
-                    <span class="circle-half-wrap pos-top"><i class="circle"></i></span>
-                    <span class="box"></span>
-                    <span class="circle-half-wrap pos-bot"><i class="circle"></i></span>
-
-                    <span class="ico-down-holder">
-                        <i class="ico down ico-sc-down-w down-1"></i>
-                        <i class="ico down ico-sc-down-w down-2 blind"></i>
-                    </span>
-                    <i class="ico up ico-sc-up"></i>
-                </button>
+              <div class="ico animated">
+              
+                <div class="circle circle-top"></div>  
+                <div class="circle circle-main"></div>
+                <div class="circle circle-bottom"></div>  
+                
+                <svg class="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 612 612" style="enable-background:new 0 0 612 612;" xml:space="preserve" >
+                  <defs>
+                    <clipPath id="cut-off-arrow">
+                      <circle cx="306" cy="306" r="287"/>
+                    </clipPath>
+                    
+                    <filter id="goo">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+                      <feBlend in="SourceGraphic" in2="goo" />
+                    </filter>
+                  
+                  </defs>
+                  <path  class="st-arrow" d="M317.5,487.6c0.3-0.3,0.4-0.7,0.7-1.1l112.6-112.6c6.3-6.3,6.3-16.5,0-22.7c-6.3-6.3-16.5-6.3-22.7,0
+                        l-86,86V136.1c0-8.9-7.3-16.2-16.2-16.2c-8.9,0-16.2,7.3-16.2,16.2v301.1l-86-86c-6.3-6.3-16.5-6.3-22.7,0
+                        c-6.3,6.3-6.3,16.5,0,22.7l112.7,112.7c0.3,0.3,0.4,0.7,0.7,1c0.5,0.5,1.2,0.5,1.7,0.9c1.7,1.4,3.6,2.3,5.6,2.9
+                        c0.8,0.2,1.5,0.4,2.3,0.4C308.8,492.6,313.8,491.3,317.5,487.6z"/>
+                </svg>
+            </div>
             </div>
 
           </div>
@@ -66,23 +80,29 @@
       <section id="section1" class="white">
         <div class="text-container text-container__back">
           <h2 class="parallax-text">
-            Follow me for more tutorials
+            The frog in the well knows
           </h2>
           <h2 class="parallax-text">
-            Double tap to like this post
+            nothing of the great ocean.
           </h2>
         </div>
         <div class="image-container parallax" data-depth='-2'>
           <div class="image-container__inner parallax" data-depth='1'>
             <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="Avocado">
           </div>
+          <div class="image-container__inner parallax" data-depth='1'>
+            <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="Avocado">
+          </div>
+           <div class="image-container__inner parallax" data-depth='1'>
+            <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="Avocado">
+          </div>
         </div>
         <div class="text-container text-container__front">
           <h2 class="parallax-text">
-            Follow me for more tutorials
+          The frog in the well knows
           </h2>
           <h2 class="parallax-text">
-            Double tap to like this post
+          nothing of the great ocean.
           </h2>
         </div>
       </section>
@@ -295,7 +315,6 @@ gsap.registerPlugin(ScrollTrigger);
     mounted(){
 
       this.$nextTick( function(){
-        this.section1TextMotion();  
         this.section3Motion();
         this.headerScroll();
       });
@@ -314,15 +333,16 @@ gsap.registerPlugin(ScrollTrigger);
         let listArr = Array.prototype.slice.call( section0TextList );
 
 
-
         let target = document.querySelector( ".section0_cricle" );
         let tl = gsap.timeline();
+        let _that = this;
         tl.to( target, 0.15, { width:"5%", height:"10%",  ease: Power0.easeOut });
         tl.to( target, 0.15, { width: "20%", height:"40%",  ease: Power0.easeOut });
         tl.to( target, 0.35, { borderRadius:"0", width: "100%", height:"100%", ease: Power0.easeIn, onComplete: function(){
          listArr.forEach( ( ele, index )=>{
            gsap.set( ele,{ top: ele.clientHeight, opacity:0  });
            gsap.to( ele, 0.35, { top: 0, opacity:1, ease:Power0.easeInOut, delay: index * 0.2 });
+            _that.section1TextMotion();  
          });
         }});
       },
@@ -332,15 +352,20 @@ gsap.registerPlugin(ScrollTrigger);
 
         textContainers.forEach(($ele, $index) =>{
           let top = $ele.getBoundingClientRect().top;
-          let start = this.window.height - top;
+          let eleTarget = document.getElementById( "section1" );
+          let start = eleTarget.clientHeight;
+          let bottom = eleTarget.offsetBottom;
+          console.log( start );
+          // let start = this.window.height - top;
           let firstText =  $ele.querySelector( ".parallax-text:first-child" );
           let secondText =  $ele.querySelector( ".parallax-text:last-child" );
 
           gsap.to(firstText, {
             scrollTrigger: {
               trigger: $ele,
+              markers:true,
               scrub: true,
-              start: start + "px bottom",
+              start: -(start/1.75) + "px top",
               end: "bottom top"
             },
             x: '-54vw',
@@ -352,16 +377,31 @@ gsap.registerPlugin(ScrollTrigger);
             scrollTrigger: {
               trigger: $ele,
               scrub: true,
-              start: start + "px bottom",
+             start:"top center",
               end: "bottom top"
             },
             x: '32vw',
             transformOrigin: "left center", 
             ease: "none"
           });
-        })
-      },
+        });
 
+        let masks = gsap.utils.toArray(".image-container__inner");
+        masks.forEach(($ele, $index) =>{
+          gsap.to($ele, {
+            height: "0%",
+            ease: "none",
+            scrollTrigger: { 
+              trigger: ".image-container",
+              start: "top top",
+              pin: true,
+              end: "+=100%",
+              scrub: 0.5
+            }
+          });
+
+        });
+      },
       section3Motion: function(){
       
         gsap.utils.toArray(".reveal").forEach(function (section) {
@@ -532,30 +572,7 @@ gsap.registerPlugin(ScrollTrigger);
           transform: translateZ(0);
           transition: transform .25s ease-in-out 1.5s,opacity .25s ease-out 1.5s;
           z-index: 2500;
-          .btn-scroll{
-            display: block;
-            position: relative;
-            width: 50px;
-            pointer-events: none;
-            cursor: none;
-            .circle-half{
-              display: block;
-              width: 100%;
-              position: relative;
-              height: 25px;
-              overflow: hidden;
-              .circle{
-                position: absolute;
-                width: 50px;
-                height: 50px;
-                left: 0;
-                right: 0;
-                border: 2px solid #fff;
-                border-radius: 50%;
-                transition: border-color .35s;
-              }
-            }
-          }
+       
         }
       }
     } 
@@ -713,7 +730,7 @@ gsap.registerPlugin(ScrollTrigger);
 
   #section1{
     position: relative;
-    padding:10vw 0;
+    margin:10vw 0;
     overflow: hidden;
     background-color: #fff;
     .image-container{
@@ -724,13 +741,14 @@ gsap.registerPlugin(ScrollTrigger);
       margin: 0 auto;
       overflow: hidden;
       .image-container__inner{
-        width: 100%;
+        position: absolute;
         height: 100%;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
         img{ 
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: scale(1.2);
+          height: 100vh;
         }
       }
     }
