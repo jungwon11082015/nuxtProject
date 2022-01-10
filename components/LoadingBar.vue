@@ -18,7 +18,8 @@
  
     }),
     created(){
-    
+      this.isLoadingCheck = false;
+      this.loading = true;
     },
     methods: {
       textShow(){

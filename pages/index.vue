@@ -6,7 +6,9 @@
           <div class="section0_center">
             <div class="section0_cricle">
               <div class="section0_video_content">
-                  <video src="/video/index.mp4" autoplay  muted="true"></video>
+                <video autoplay controls loop  muted="true">
+                    <source src="/video/index.mp4" type="video/mp4">
+                </video>
               </div>
             </div>
             <div class="section0_text">
@@ -88,12 +90,6 @@
         </div>
         <div class="image-container parallax" data-depth='-2'>
           <div class="image-container__inner parallax" data-depth='1'>
-            <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="Avocado">
-          </div>
-          <div class="image-container__inner parallax" data-depth='1'>
-            <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="Avocado">
-          </div>
-           <div class="image-container__inner parallax" data-depth='1'>
             <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=2168&q=80" alt="Avocado">
           </div>
         </div>
@@ -298,23 +294,25 @@ gsap.registerPlugin(ScrollTrigger);
   
     },
     beforeCreate(){
-      // console.log( "beforeCreate" );
     },
 
     created(){
-      this.$nuxt.$on('eventBusLoadingCheck', (isLoadingCheck) => {
-         this.loadingChecked = isLoadingCheck;
-         console.log( this.loadingChecked  );
-         if( this.loadingChecked ){
-             this.section0Motion();
-         }
-      })
 
       // ScrollTrigger.getAll();
     },
     mounted(){
 
       this.$nextTick( function(){
+
+      this.$nuxt.$on('eventBusLoadingCheck', (isLoadingCheck) => {
+         this.loadingChecked = isLoadingCheck;
+         console.log( this.loadingChecked ); 
+         if( this.loadingChecked ){
+             this.section0Motion();
+         }
+      })
+
+
         this.section3Motion();
         this.headerScroll();
       });
@@ -322,6 +320,7 @@ gsap.registerPlugin(ScrollTrigger);
      
     methods:{
       section0Motion: function(){
+        window.scrollTo(0,0);
         let section0Attribute  = this.$refs.section0Attr;
         let section0Style = {
           position: "relative",
@@ -355,7 +354,6 @@ gsap.registerPlugin(ScrollTrigger);
           let eleTarget = document.getElementById( "section1" );
           let start = eleTarget.clientHeight;
           let bottom = eleTarget.offsetBottom;
-          console.log( start );
           // let start = this.window.height - top;
           let firstText =  $ele.querySelector( ".parallax-text:first-child" );
           let secondText =  $ele.querySelector( ".parallax-text:last-child" );
@@ -363,7 +361,7 @@ gsap.registerPlugin(ScrollTrigger);
           gsap.to(firstText, {
             scrollTrigger: {
               trigger: $ele,
-              markers:true,
+              // markers:true,
               scrub: true,
               start: -(start/1.75) + "px top",
               end: "bottom top"
@@ -386,21 +384,6 @@ gsap.registerPlugin(ScrollTrigger);
           });
         });
 
-        let masks = gsap.utils.toArray(".image-container__inner");
-        masks.forEach(($ele, $index) =>{
-          gsap.to($ele, {
-            height: "0%",
-            ease: "none",
-            scrollTrigger: { 
-              trigger: ".image-container",
-              start: "top top",
-              pin: true,
-              end: "+=100%",
-              scrub: 0.5
-            }
-          });
-
-        });
       },
       section3Motion: function(){
       
